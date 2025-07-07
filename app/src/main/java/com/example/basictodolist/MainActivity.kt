@@ -74,20 +74,14 @@ class MainActivity : AppCompatActivity() {
         rvTodo.layoutManager = LinearLayoutManager(this)
 
 
-fbAdd.setOnClickListener{
-    val view = layoutInflater.inflate(R.layout.add_todo_dialog, null)
-    etNewtodo = view.findViewById(R.id.etTodo)
-    savebtn = view.findViewById(R.id.btnSave)
-    val dialog = BottomSheetDialog(this)
-    dialog.setContentView(view)
-    dialog.show()
 
-    savebtn.setOnClickListener {
-        if(etNewtodo.text.toString().isNotEmpty()){
-        sampleList.add(Todo(etNewtodo.text.toString(), false))
-        todoAdaptor.notifyDataSetChanged()
-            dialog.dismiss()
-        }  }
+fbAdd.setOnClickListener{
+    val bottomSheet = BottomSheetFragment()
+     bottomSheet.show(supportFragmentManager, "BottomSheetFragment")
+    bottomSheet.TodoAdd = { todo ->
+        sampleList.add(Todo(todo, false))
+        todoAdaptor.notifyItemInserted(sampleList.size-1)
+    }
 }
 
 
