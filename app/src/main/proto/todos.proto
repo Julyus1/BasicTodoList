@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option java_package = "com.example.basictodolist";
+option  java_multiple_files = true;
+
+message Todo{
+  string title = 1;
+  bool isDone = 2;
+}
+
+message Todos {
+  repeated Todo items = 1;
+}
